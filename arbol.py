@@ -7,14 +7,12 @@
 class Nodo:
 	def __init__(self, data):
 		self.data = data
-		self.prev=None
-		self.next = None
+		self.siguiente = None
 
-# CLase Listas Circular Doblemente Enlazada 
-class ListaDE:
+# CLase Listas enlazada simple
+class ListaSE:
 	def __init__(self):
 		self.cabeza = None
-		self.cola = None
   
   	# Lista Vacia
 	def vacio(self):
@@ -22,62 +20,209 @@ class ListaDE:
 			print("Está vacia")
 		else:
 			print("Lista no vacia")
-	def void(self):
-		if self.cabeza == None:
-			return False
-		else:
-			return True
 
-	# Agregar al inicio // Reescribir self.cabeza
+	# Agregar al inicio
 	def agregarInicio(self, data):
 		nuevo_nodo = Nodo(data)
+		if self.cabeza is None:
+			self.cabeza = nuevo_nodo
+			return
+		else:
+			nuevo_nodo.siguiente = self.cabeza
+			self.cabeza = nuevo_nodo
 
-
-	       # Agregar al final
-	def agregarFinal(self, data):
+	# Imprimir lista
+	def imprimirLista(self):
+		print('[', end="")
+		if self.cabeza == None:
+			print(' ]')
+			return
+		temp = self.cabeza
+		while( True ):
+			print("",temp.data, end="")
+			if (temp.siguiente == None):
+				break
+			temp = temp.siguiente
+			print(" ,", end="")
+		print(' ]')
+  
+	# Buscar último
+	def ultimo(self):
+		temp = self.cabeza
+		while (True):
+			if temp.siguiente == None:
+				return temp
+			temp = temp.siguiente
+   
+	# Insertar al final
+	def agregarFinal(self,data):
 		nuevo_nodo = Nodo(data)
+		if self.cabeza is None:
+			self.cabeza = nuevo_nodo
+			return
+		temp = self.ultimo()
+		temp.siguiente = nuevo_nodo
 
-   
-   #  Eliminar nodo por su data
-	def Delete(self, data):
-		temp_nodo=self.cabeza
-		while temp_nodo.data != data and temp_nodo != self.cola:
-			antes_nodo=temp_nodo
-			temp_nodo=temp_nodo.next
+	# Eliminar primero
+	def eliminarInicio(self):
+		self.cabeza = self.cabeza.siguiente
 
-    
+	# Eliminar último
+	def eliminarUltimo(self):
+		if (self.cabeza.siguiente == None):
+			self.cabeza = None
+			return
+		temp = self.cabeza
+		while( True ):
+			if temp.siguiente.siguiente == None:
+				temp.siguiente = None
+				return
+			temp = temp.siguiente
 
-   
-	#  Imprimir todos los elementos de la lista
-	def printPreOrden(self):
-    def printInOrden(self):
-    def printPostOrden(self):
+	# Buscar un elemento por su valor
+	def buscar(self,data):
+		temp = self.cabeza
+		while ( True ):
+			if temp.data == data:
+				return True
+			if temp.siguiente == None:
+				return False
+			temp = temp.siguiente
 
+    # Insertar valor data antes del valor x
+	def insertarAntes(self,data,x):
+		if not self.buscar(x) :
+			print('El valor', data, 'no está en la lista')
+			return
+		if self.cabeza.data == x:
+			self.agregarInicio(data)
+			return
+		nuevo_nodo = Nodo(data)
+		temp = self.cabeza
+		while ( True ):
+			if temp.siguiente.data == x:
+				nuevo_nodo.siguiente = temp.siguiente
+				temp.siguiente = nuevo_nodo
+				return
+			temp = temp.siguiente
 
-		
+	# Insertar valor data despues del valor x
+	def insertarDespues(self,data,x):
+		if not self.buscar(x) :
+			print('El valor', data, 'no está en la lista')
+			return
+		nuevo_nodo = Nodo(data)
+		temp = self.cabeza
+		while ( True ):
+			if temp.data == x:
+				nuevo_nodo.siguiente = temp.siguiente
+				temp.siguiente = nuevo_nodo
+				return
+			temp = temp.siguiente
 
-       
-				
+	# Contar la cantidad de elementos
+	def contar(self):
+		temp = self.cabeza
+		cont = 1
+		while ( True ):
+			if temp.siguiente == None:
+				return cont
+			cont += 1
+			temp = temp.siguiente
 			
+# CLase Listas enlazada simple
+class ListaSE:
+	def __init__(self):
+		self.cabeza = None
+  
+  	# Lista Vacia
+	def vacio(self):
+		if self.cabeza == None:
+			print("Está vacia")
+		else:
+			print("Lista no vacia")
 
-# Crear la lista enlazada
-mi_lista = ListaDE()
+	# Agregar al inicio
+	def agregarInicio(self, data):
 
-# Agregar elementos
-mi_lista.agregarInicio(20)
-mi_lista.agregarInicio(10)
-mi_lista.agregarFinal(30)
-mi_lista.agregarFinal(40)
+	# Imprimir lista
+	def toStringPreOrden(self):
+	def toStringPosOrden(self):
+	def toStringInOrden(self):
+	def toStringPorNiveles(self):
+   
+	# Insertar al final
+	def agregarFinal(self,data):
+		nuevo_nodo = Nodo(data)
+		if self.cabeza is None:
+			self.cabeza = nuevo_nodo
+			return
+		temp = self.ultimo()
+		temp.siguiente = nuevo_nodo
 
-# Imprimir la lista
-mi_lista.printLista()
+	# Eliminar primero
+	def eliminarInicio(self):
+		self.cabeza = self.cabeza.siguiente
 
-# Imprimir la lista después de modificaciones
-mi_lista.printLista()
+	# Eliminar último
+	def eliminarUltimo(self):
+		if (self.cabeza.siguiente == None):
+			self.cabeza = None
+			return
+		temp = self.cabeza
+		while( True ):
+			if temp.siguiente.siguiente == None:
+				temp.siguiente = None
+				return
+			temp = temp.siguiente
 
-# Eliminar elementos
-mi_lista.Delete(10)
-mi_lista.Delete(140400)
+	# Buscar un elemento por su valor
+	def buscar(self,data):
+		temp = self.cabeza
+		while ( True ):
+			if temp.data == data:
+				return True
+			if temp.siguiente == None:
+				return False
+			temp = temp.siguiente
 
-# Imprimir la lista final
-mi_lista.printLista ()
+    # Insertar valor data antes del valor x
+	def insertarAntes(self,data,x):
+		if not self.buscar(x) :
+			print('El valor', data, 'no está en la lista')
+			return
+		if self.cabeza.data == x:
+			self.agregarInicio(data)
+			return
+		nuevo_nodo = Nodo(data)
+		temp = self.cabeza
+		while ( True ):
+			if temp.siguiente.data == x:
+				nuevo_nodo.siguiente = temp.siguiente
+				temp.siguiente = nuevo_nodo
+				return
+			temp = temp.siguiente
+
+	# Insertar valor data despues del valor x
+	def insertarDespues(self,data,x):
+		if not self.buscar(x) :
+			print('El valor', data, 'no está en la lista')
+			return
+		nuevo_nodo = Nodo(data)
+		temp = self.cabeza
+		while ( True ):
+			if temp.data == x:
+				nuevo_nodo.siguiente = temp.siguiente
+				temp.siguiente = nuevo_nodo
+				return
+			temp = temp.siguiente
+
+	# Contar la cantidad de elementos
+	def contar(self):
+		temp = self.cabeza
+		cont = 1
+		while ( True ):
+			if temp.siguiente == None:
+				return cont
+			cont += 1
+			temp = temp.siguiente

@@ -10,7 +10,7 @@ class Nodo:
 		self.siguiente = None
 
 # CLase Listas enlazada simple
-class ListaSE:
+class Hijo:
 	def __init__(self):
 		self.cabeza = None
   
@@ -129,11 +129,14 @@ class ListaSE:
 				return cont
 			cont += 1
 			temp = temp.siguiente
-			
+		
+  
+  
+  	
 # CLase Listas enlazada simple
-class ListaSE:
+class Arbol:
 	def __init__(self):
-		self.cabeza = None
+		self.raiz = None
   
   	# Lista Vacia
 	def vacio(self):
@@ -142,23 +145,29 @@ class ListaSE:
 		else:
 			print("Lista no vacia")
 
-	# Agregar al inicio
-	def agregarInicio(self, data):
+	# Agregar la raiz del arbol
+	def agregarRaiz(self, data):
+		nuevo_nodo = Nodo(data)
+		self.raiz=nuevo_nodo
 
-	# Imprimir lista
-	def toStringPreOrden(self):
-	def toStringPosOrden(self):
-	def toStringInOrden(self):
-	def toStringPorNiveles(self):
-   
-	# Insertar al final
-	def agregarFinal(self,data):
+ 
+ 	# Insertar al final
+	def agregarHijo(self, data):
 		nuevo_nodo = Nodo(data)
 		if self.cabeza is None:
 			self.cabeza = nuevo_nodo
 			return
 		temp = self.ultimo()
 		temp.siguiente = nuevo_nodo
+  
+	# Imprimir lista
+	def toStringPreOrden(self):
+		
+	def toStringPosOrden(self):
+	def toStringInOrden(self):
+	def toStringPorNiveles(self):
+   
+
 
 	# Eliminar primero
 	def eliminarInicio(self):
